@@ -1,5 +1,5 @@
 /*
-	*Autor: Juan Pablo Díaz Correa
+	*Autor: Juan Pablo Dï¿½az Correa
 	*GitHub: @Juanipis
 	*Twitter: @Juanipis
 	*Date: 26/01/2021
@@ -64,6 +64,8 @@ public class Clase1 {
 		 */
 		final float PI = 3.14f;
 		System.out.println(PI);
+
+		System.out.println("Esto son cosas mias sjskjs");
 	}
 
 }
