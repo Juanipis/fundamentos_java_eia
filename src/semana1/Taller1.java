@@ -54,7 +54,6 @@ class Constantes1{
 }
 
 class Operadores1{
-	
 	int cosas1 = 10;
 	int cosas2 = 12;
 	
@@ -66,8 +65,6 @@ class Operadores1{
 	String texto2 = "Sos grande ";
 	
 	public void OperadoresAritmeticos() {
-		//Operadores de aritméticos
-		
 		//Operador unario de cambio de signo
 		int negativo = -15;
 		int negativo2 = -cosas1;
