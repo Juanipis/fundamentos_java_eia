@@ -54,7 +54,7 @@ class Constantes1{
 }
 
 class Operadores1{
-	//Operadores de asignación
+	
 	int cosas1 = 10;
 	int cosas2 = 12;
 	
