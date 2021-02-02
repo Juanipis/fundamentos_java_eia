@@ -12,7 +12,6 @@ public class Taller1 {
 		final int NUMERO;
 		NUMERO = 10;
 		System.out.print(NUMERO);
-		
 	}
 
 }
