@@ -1,3 +1,10 @@
+/*
+	*Autor: Juan Pablo Díaz Correa
+	*GitHub: @Juanipis
+	*Twitter: @Juanipis
+	*Date: 12/02/2021
+*/
+
 package Ejercicios;
 
 public class Condicionales {
