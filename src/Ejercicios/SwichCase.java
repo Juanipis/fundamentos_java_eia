@@ -61,7 +61,7 @@ class SwitchCaseUso {
                 System.out.println("El 11 de septiembre de 1973 en Chile se produce un golpe de Estado y comienza la dictadura militar, que duraría hasta 1990.7");
                 break;
             case "octubre":
-            System.out.println("El 12 de octubre de 1492, un grupo expedicionario español, comandado por Cristóbal Colón llega al continente americano, protagonizando uno de los mayores hitos de la Historia");
+                System.out.println("El 12 de octubre de 1492, un grupo expedicionario español, comandado por Cristóbal Colón llega al continente americano, protagonizando uno de los mayores hitos de la Historia");
                 break;
             case "noviembre":
                 System.out.println("El 11 de noviembre se firma el armisticio que pone fin a la Primera Guerra Mundial");
