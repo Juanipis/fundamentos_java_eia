@@ -69,7 +69,8 @@ class SwitchCaseUso {
             case "diciembre":
                 System.out.println("El 31 de diciembre se celebra la Nochevieja y es el último día del año en el calendario gregoriano");
                 break;
-            default: System.out.println("Ese mes no existe o está numericamente o en otro idioma diferente del español o no es del calendario gregoriano");
+            default: 
+                System.out.println("Ese mes no existe o está numericamente o en otro idioma diferente del español o no es del calendario gregoriano");
                 break;
             }
         }
