@@ -58,11 +58,11 @@ class Adivino{
                     }
                     else if( numeroUser > numeroPensador){
                         System.out.println("Fallaste. El número pensado es menor que el tuyo.");
-                        return pedirNumero(numeroPensador, cuenta-1);
+                        return pedirNumero(numeroPensador, cuenta-2);
                     }
                     else if( numeroUser < numeroPensador){
                         System.out.println("Fallaste. El número pensado es mayor que el tuyo ");
-                        return pedirNumero(numeroPensador, cuenta-1);
+                        return pedirNumero(numeroPensador, cuenta-2);
                     }
                 }
                 
