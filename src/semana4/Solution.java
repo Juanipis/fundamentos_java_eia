@@ -5,8 +5,7 @@ package semana4;
     *Twitter: @Juanipis
     *Date: 23/02/2021
 */
-import java.text.Format;
-import java.util.Locale;
+
 
 public class Solution {
     public static void main(String[] arg) {
@@ -19,7 +18,7 @@ class Solucion{
         int totalFactorial = 1;
         for (int i = 1; i <= numero; i++) {
             totalFactorial *= i;
-            System.out.printf(String.format(Locale.US, "%d! = %s = %,d\n" ,i,numString(i),totalFactorial));
+            System.out.printf("%d! = %s = %d\n" ,i,recursiveString(i),totalFactorial);
         }
     }
     public String numString(int number){
@@ -29,5 +28,14 @@ class Solucion{
             else{resultado += i + " * ";}
         }
         return resultado;
+    }
+
+    public String recursiveString(int numero){
+        if(numero == 1){
+            return "" + numero;
+        }
+        else{
+            return numero + " * " + recursiveString(numero-1);   
+        }
     }
 }
