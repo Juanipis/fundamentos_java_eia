@@ -1,3 +1,4 @@
+  
 package semana4;
 /*
     *Autor: Juan Pablo Díaz Correa
@@ -5,12 +6,9 @@ package semana4;
     *Twitter: @Juanipis
     *Date: 26/02/2021
 */
-<<<<<<< HEAD
-=======
 import java.io.FileWriter;
 import java.math.BigInteger;
 import java.util.Scanner;
->>>>>>> 5147f014aa484a0f9f1e5235c73e85e8b896c905
 
 
 public class Solution {
@@ -40,13 +38,6 @@ public class Solution {
     }
 }
 class Solucion{
-<<<<<<< HEAD
-    public void factorial(int numero){
-        int totalFactorial = 1;
-        for (int i = 1; i <= numero; i++) {
-            totalFactorial *= i;
-            System.out.printf("%d! = %s = %d\n" ,i,recursiveString(i),totalFactorial);
-=======
     BigInteger totalFactorial = new BigInteger("1");
     public void factorial(BigInteger numero, FileWriter fichero, String nombreFichero){
         try {
@@ -59,7 +50,6 @@ class Solucion{
             fichero.close();
         } catch (Exception ex) {
             System.out.println("Error : " + ex.getMessage());
->>>>>>> 5147f014aa484a0f9f1e5235c73e85e8b896c905
         }
         
         
@@ -75,14 +65,5 @@ class Solucion{
             }
         }
         return resultado;
-    }
-
-    public String recursiveString(int numero){
-        if(numero == 1){
-            return "" + numero;
-        }
-        else{
-            return numero + " * " + recursiveString(numero-1);   
-        }
     }
 }

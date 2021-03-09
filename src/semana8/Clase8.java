@@ -12,21 +12,37 @@ public class Clase8 {
 }
 
 class Ejercicio1{
-	int filas, columnas;
 	public void main(){
+		int filas; 
+		int columnas;
+		int objetivo;
 		Matrices2D matrices2D = new Matrices2D();
+		
 		try{
 			System.out.println("Bienvenido al creador de matices aleatorias");
 			System.out.print("Escribe el numero de filas: ");
 			filas = matrices2D.pedirScanner();
 			System.out.print("Escribe el numero de columnas: ");
 			columnas = matrices2D.pedirScanner();
-			int[][] matriz = matrices2D.MatrizCrear(filas, columnas);
-			String matrizRepresentada = matrices2D.MatrizRepresentada(matriz);
+			int[][] matriz = matrices2D.matrizCrear(filas, columnas);
+			String matrizRepresentada = matrices2D.matrizRepresentada(matriz);
+			System.out.println("Tu nueva matriz es");
 			System.out.println(matrizRepresentada);
-			System.out.println(matrices2D.BusquedaNumeros(matriz, 10));
+
+			System.out.println("¿Que numero deseas buscar?: ");
+			objetivo = matrices2D.pedirScanner();
+			System.out.println(matrices2D.busquedaNumeros(matriz, objetivo));
+			
 			matriz = matrices2D.ordenarColumnasMenorMayor(matriz);
-			matrizRepresentada = matrices2D.MatrizRepresentada(matriz);
+			matrizRepresentada = matrices2D.matrizRepresentada(matriz);
+			System.out.println("La matriz ordenada en columnas de menor a mayor es");
+			System.out.println(matrizRepresentada);
+
+			
+			matriz = matrices2D.ordenarColumnasMayorMenor(matriz);
+			matrizRepresentada = matrices2D.matrizRepresentada(matriz);
+			System.out.println("La matriz ordenada en columnas de mayor a menor es");
+			System.out.println(matrizRepresentada);
 			
 			
 			
@@ -44,7 +60,7 @@ class Matrices2D{
 	private Scanner entrada = new Scanner(System.in);
 	private SecureRandom rand =  new SecureRandom();
 	
-	public int[][] MatrizCrear(int filas, int columnas){
+	public int[][] matrizCrear(int filas, int columnas){
 		int[][] matriz = new int[filas][columnas];
 		for(int f = 0;f < matriz.length; f++){
 			for(int c = 0; c < matriz[f].length; c++){
@@ -54,53 +70,75 @@ class Matrices2D{
 		return matriz;
 	}
 	
-	public String MatrizRepresentada(int[][] matriz){
-		String matrizRepresentada = "";
+	public String matrizRepresentada(int[][] matriz){
+		StringBuilder matrizBuilder = new StringBuilder();
+		
 		for(int f = 0;f < matriz.length; f++){
 			for(int c = 0; c < matriz[f].length; c++){
-				matrizRepresentada += matriz[f][c] + "\t";
+				matrizBuilder.append(matriz[f][c] + "\t");
 			}
-			matrizRepresentada += "\n";
+			matrizBuilder.append("\n");
 		}
-		return matrizRepresentada;
+		return matrizBuilder.toString();
 	}
 	
-	public String BusquedaNumeros(int[][] matriz,int objetivo){
-		String repetidosMatriz = "";
+	public String busquedaNumeros(int[][] matriz,int objetivo){
+		StringBuilder repetidosBuilder = new StringBuilder();
 		int repetidosContador = 0;
 		for(int f = 0;f < matriz.length; f++){
 			for(int c = 0; c < matriz[f].length; c++){
 				if(objetivo == matriz[f][c]){
-					repetidosMatriz += "["+f+"]"+"["+c+"],  ";
+					repetidosBuilder.append("["+f+"]"+"["+c+"],  ") ;
 					repetidosContador++;
 					
 				}
 			}
 		}
+		String repetidosMatriz = repetidosBuilder.toString();
 		return "El numero " + objetivo + " esta repetido " + repetidosContador + " veces en las posiciones: " + repetidosMatriz;
 	}
 	
 	public int[][] ordenarColumnasMenorMayor(int[][] matriz){
-		int valorPos1, valorPos2;
+		int valorPos1;
+		int valorPos2;
 		for(int c = 0;c < matriz[0].length; c++){
-			for(int f = 0; f < matriz.length; f++){
-				valorPos1 = matriz[f][c];
-				valorPos2 = matriz[f+1][c+1];
-				/*
-				if( valorPos1 > valorPos2 ){
-					matriz[f+1][c+1] = valorPos1;
-					matriz[f][c] = valorPos2;
+			for (int f = 0; f < matriz.length-1; f++) {
+				for (int j = 0; j < matriz.length-1-f; j++) {
+					valorPos1 = matriz[j][c];
+					valorPos2 = matriz[j+1][c];
+					if( valorPos1 > valorPos2 ){
+						matriz[j+1][c] = valorPos1;
+						matriz[j][c] = valorPos2;
+					}
 				}
-				*/
 			}
 		}
 		return matriz;
 	}
+	public int[][] ordenarColumnasMayorMenor(int[][] matriz){
+		int valorPos1;
+		int valorPos2;
+		for(int c = 0;c < matriz[0].length; c++){
+			for (int f = 0; f < matriz.length-1; f++) {
+				for (int j = 0; j < matriz.length-1-f; j++) {
+					valorPos1 = matriz[j][c];
+					valorPos2 = matriz[j+1][c];
+					if( valorPos1 < valorPos2 ){
+						matriz[j+1][c] = valorPos1;
+						matriz[j][c] = valorPos2;
+					}
+				}
+				
+			}
+		}
+		return matriz;
+	}
+		
+	
 	
 	public int pedirScanner(){
 		return entrada.nextInt();
 	}
-	//Ordenar matriz de menor a mayor por columnas
 	
 	public void cerrarScanner(){
 		entrada.close();
