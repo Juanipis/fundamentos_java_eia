@@ -1,7 +1,7 @@
 package semana8;
 
 import java.util.Scanner;
-
+import java.security.SecureRandom;
 public class Ejercicios {
 	public static void main(String[] args){
 		// Numero Capicua
@@ -43,6 +43,7 @@ class Numeros{
 class Cine{
 	private Scanner entradaScanner = new Scanner(System.in);
 	private char[][] asientos = new char[20][10];
+	private SecureRandom random = new SecureRandom();
 
 	public void main() {
 		//Metodos predeterminados
@@ -65,9 +66,15 @@ class Cine{
 	}
 
 	private void llenarSillasVacias(char[][] sillas){
+		
 		for(int f = 0;f < sillas.length; f++){
 			for(int c = 0; c < sillas[f].length; c++){
-				sillas[f][c] = 'o';
+				if(random.nextInt(4) == 1){
+					sillas[f][c] = 'x';
+				}
+				else{
+					sillas[f][c] = 'o';
+				}
 			}
 		}
 	}
