@@ -1,21 +1,22 @@
 package Ejercicios;
 import java.util.Scanner;
-
+import java.util.ArrayList;
 public class Parcial2020{
     public static void main(String[] args){
         Scanner entrada = new Scanner(System.in);
-        int numeroInfractores = 3;
-        int[] valorMultas = new int[numeroInfractores];
-        String[] nombresInfractores = new String[numeroInfractores];
+        ArrayList<Integer> valorMultas = new ArrayList<Integer>();
+        ArrayList<String> nombresInfractores = new ArrayList<String>();
         int valorMulta = 0;
         int infractorMayor = 0;
         int valorTotalMultas = 0;
         int valorTotalMultasSoat = 0;
         int valorTotalMultasTecno = 0;
         int valorTotalMultasEtanol = 0;
-        for(int i = 0; i < numeroInfractores; i++){
-            System.out.print("Escriba el nombre del infractor " + (i+1) + " ");
-            nombresInfractores[i] = entrada.next();
+        boolean condicionSeguir = true;
+        int i = 1; //contador estilo for
+        do{
+            System.out.print("Escriba el nombre del infractor " + (i) + " ");
+            nombresInfractores.add(entrada.next());
             System.out.print("Tiene soat (s/n): ");
             if(entrada.next().toLowerCase().charAt(0) == 'n'){
                 valorMulta += 535600;
@@ -46,19 +47,26 @@ public class Parcial2020{
                 valorMulta += 14148000;
                 valorTotalMultasEtanol += 14148000;
             }
-            valorMultas[i] = valorMulta;
+            valorMultas.add(valorMulta);
             valorTotalMultas += valorMulta;
-            System.out.println("El conductor: " + nombresInfractores[i] +" Debe pagar un total de " + valorMultas[i]);
+            
+            System.out.println("El conductor: " + nombresInfractores.get(i-1) +" Debe pagar un total de " + valorMultas.get(i-1));
             valorMulta = 0;
-        }
-        for (int i = 0; i < numeroInfractores; i++) {
-            if(valorMultas[infractorMayor] < valorMultas[i]){
-                infractorMayor = i;
+            i++;
+            System.out.print("¿Desea seguir?: ");
+            if(entrada.next().toLowerCase().charAt(0) == 'n'){
+                condicionSeguir = false;
+            }
+        }while(condicionSeguir);
+
+        for (int c = 0; c < i-1; c++) {
+            if(valorMultas.get(infractorMayor) < valorMultas.get(c)){
+                infractorMayor = c;
             }
         }
-        System.out.println("El conductor: " + nombresInfractores[infractorMayor] + " tiene la mayor multa por un total de: " + valorMultas[infractorMayor]);
-        System.out.println("El valor total de las multas es: " + valorTotalMultas + " y su promedio es de " + (valorTotalMultas/numeroInfractores));
-        System.out.println("El valor todal de multas por soat es de " + valorTotalMultasSoat + " y su promedio es de " + (valorTotalMultasSoat/numeroInfractores));
+        System.out.println("El conductor: " + nombresInfractores.get(infractorMayor) + " tiene la mayor multa por un total de: " + valorMultas.get(infractorMayor));
+        System.out.println("El valor total de las multas es: " + valorTotalMultas + " y su promedio es de " + (valorTotalMultas/i));
+        System.out.println("El valor todal de multas por soat es de " + valorTotalMultasSoat + " y su promedio es de " + (valorTotalMultasSoat/i));
         
         if(valorTotalMultasSoat > valorTotalMultasTecno && valorTotalMultasSoat > valorTotalMultasEtanol){
             System.out.println("La multa que mas recaudó dinero fue por soat: " + valorTotalMultasSoat);
