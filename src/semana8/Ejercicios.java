@@ -1,5 +1,6 @@
 package semana8;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.security.SecureRandom;
 public class Ejercicios {
@@ -14,10 +15,16 @@ public class Ejercicios {
 		System.out.println();
 		System.out.println("¿El numero es capicua? : " + num.numeroCapicua(numero));
 		*/
-
+		/*
+		ArrayList<int[]> vectores = new ArrayList<int[]>();
+		vectores.add(new int[]{0,2});
+		System.out.println(vectores.get(0)[1]);
+		*/
 		//Cine
+		
 		Cine cine = new Cine();
 		cine.main();
+		
 	}
 }
 
@@ -45,24 +52,56 @@ class Cine{
 	private char[][] asientos = new char[20][10];
 	private SecureRandom random = new SecureRandom();
 
+	ArrayList<int[]> reservas = new ArrayList<int[]>();
+	
+
 	public void main() {
 		//Metodos predeterminados
 		llenarSillasVacias(asientos);
-		int numeroReserva = 1;
+		
 		boolean seguirReservando = true;
 		//Inicio
 		System.out.println("Bienvenido al cine Juanipis, tenemos los siguientes asientos:");
 		System.out.println(verAsientos(asientos));
 		
+		
 		do {
-			System.out.println("Reserva #" + numeroReserva);
-			pedirUbicacion();
-			System.out.println(verAsientos(asientos));
-			numeroReserva++;
-			seguirReservando = deseaSeguirReservando();
+			verReservas();
+			System.out.print("¿Que deseas hacer? \n1. Reservar silla\n2. Cancelar reserva\n3. Salir\nEscribe tu opción: ");
+			
+			
+			int seleccion = entradaIntPedir();
+			switch (seleccion) {
+				case 1: //reservar silla
+					System.out.println("Reserva #" + (reservas.size()+1));
+					pedirUbicacion('r');
+					System.out.println(verAsientos(asientos));
+					
+					break;
+				
+				case 2: // cancelar silla
+					/* //Metodo directo - no usar
+					pedirUbicacion('c');
+					System.out.println(verAsientos(asientos));
+					*/
+					//Metodo correcto
+					verReservas();
+					cancelarReserva();
+					System.out.println(verAsientos(asientos));
+					break;
+
+				
+				case 3: // salir
+					System.out.println("Gracias por su reserva, lo esperamos pronto en nuestras salas");
+					entradaCerrar();
+					seguirReservando = false;
+					break;
+				default:
+					break;
+			}
+			
 		} while (seguirReservando);
-		System.out.println("Gracias por su reserva, lo esperamos pronto en nuestras salas");
-		entradaCerrar();
+		
 	}
 
 	private void llenarSillasVacias(char[][] sillas){
@@ -100,26 +139,85 @@ class Cine{
 		return matrizBuilder.toString();
 	}
 
-	private void pedirUbicacion() {
+	private void verReservas(){
+		for (int i = 0; i < reservas.size(); i++) {
+			System.out.println("Reserva " + (i+1) + ":   Fila:"+ (reservas.get(i)[0]+1) + " , Columna " + (reservas.get(i)[1] +1));
+		}
+	}
+
+	private void cancelarReserva(){
+		
+		if(reservas.size() != 0){
+			
+				System.out.print("Escriba el numero de la reserva que desea cancelar: ");
+				
+				int indexReserva = entradaScanner.nextInt();
+				
+				if((reservas.size() == 1 && indexReserva == 1) || (indexReserva <= reservas.size() && indexReserva >= 1)){ // en caso de que solo hay una reserva
+					int row = reservas.get(indexReserva-1)[0];
+					int col = reservas.get(indexReserva-1)[1];
+					cambiarEstadoSilla(row, col, 'o');
+					reservas.remove(indexReserva-1);
+					System.out.println("Reserva cancelada correctamente");
+				}
+				else{
+					System.out.println("Numero fuera del limite, vuelva a intentarlo");
+				}
+		}
+		else{
+			System.out.println("No hay reservas");
+		}
+		
+	}
+
+	private void cambiarEstadoSilla(int row, int col, char estado){
+		asientos[row][col] = estado;
+	}
+
+	private void pedirUbicacion(char option) {
 		int row;
 		int col;
-		try {
-			System.out.print("Por favor escriba el numero de la fila: ");
-			row = entradaIntPedir()-1;
-			System.out.print("Por favor escriba el numero de la columna: ");
-			col = entradaIntPedir()-1;
-			if(comprobarUbicacionOcupado(row, col)){
-				asientos[row][col] = 'x';
-				System.out.println("Asiento guardado correctamente");
+		if(option == 'r'){ //Reservar
+			try {
+				System.out.print("Por favor escriba el numero de la fila: ");
+				row = entradaIntPedir()-1;
+				System.out.print("Por favor escriba el numero de la columna: ");
+				col = entradaIntPedir()-1;
+				if(comprobarUbicacionOcupado(row, col)){
+					reservas.add(new int[]{row, col});
+					asientos[row][col] = 'x';
+					System.out.println("Asiento guardado correctamente");
+					
+				}
+				else{
+					System.out.println("Lo sentimos, la silla esta ocupada");
+				}
+	
+			} catch (Exception e) {
+				System.out.println("Parece que no escribiste una ubicacion valida, intentalo de nuevo");
+				pedirUbicacion('r');
 			}
-			else{
-				System.out.println("Lo sentimos, la silla esta ocupada");
-			}
-
-		} catch (Exception e) {
-			System.out.println("Parece que no escribiste una ubicacion valida, intentalo de nuevo");
-			pedirUbicacion();
 		}
+		else if(option == 'c'){ //cancelar
+			try {
+				System.out.print("Por favor escriba el numero de la fila: ");
+				row = entradaIntPedir()-1;
+				System.out.print("Por favor escriba el numero de la columna: ");
+				col = entradaIntPedir()-1;
+				if(!comprobarUbicacionOcupado(row, col)){
+					asientos[row][col] = 'o';
+					System.out.println("Asiento cancelado correctamente");
+				}
+				else{
+					System.out.println("Lo sentimos, la silla no está reservada, por lo tanto no se puede cancelar");
+				}
+	
+			} catch (Exception e) {
+				System.out.println("Parece que no escribiste una ubicacion valida, intentalo de nuevo");
+				pedirUbicacion('c');
+			}
+		}
+		
 	}
 	private boolean comprobarUbicacionOcupado(int row, int col) {
 		return asientos[row][col] != 'x';

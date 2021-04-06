@@ -7,7 +7,8 @@ public class Arreglos {
     public static void main(String[] args) {
         ArreglosEjercicios arreglos = new ArreglosEjercicios();
         //arreglos.encontrarSuma();
-        //arreglos.capicua();
+        arreglos.capicua();
+        /*
         MergeSort mergeSort = new MergeSort();
         int arr [] = {5,26,12,6,1,4,7};
         int n = arr.length;
@@ -22,6 +23,7 @@ public class Arreglos {
         System.out.println("Array ordenado:");
         mergeSort.sort(arr,0,n-1);
         mergeSort.printArray(arr);
+        */
         
     }
 }
