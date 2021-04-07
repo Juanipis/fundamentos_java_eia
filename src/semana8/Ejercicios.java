@@ -170,7 +170,7 @@ class Cine{
 	}
 
 	private void cancelarReserva(){
-		if(reservas.size() != 0){
+		if(!reservas.isEmpty()){
 			System.out.print("Escriba el numero de la reserva que desea cancelar: ");
 			int indexReserva; 
 			try {
