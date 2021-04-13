@@ -4,63 +4,68 @@ public class MatrizCaracol {
     public static void main(String[] args) {
         MatricesBonitas bonitas = new MatricesBonitas();
 
-        int n_filas = 10;
-        int n_columnas = 10;
+        int n_filas = 13;
+        int n_columnas = 13;
         int[][] matrizCaracol = new int[n_filas][n_columnas];
-        int numero_maximo_caracol = n_filas*n_columnas;
 
         
 
         
-        boolean seguir = true;
-        int x_inicial = 0;
-        int y_inicial = 0;
-        /*
-        matrizCaracol[x_inicial][y_inicial] = numero_maximo_caracol;
-        
-        numero_maximo_caracol--;
-        */
-
+        int xInicial = 0;
+        int yInicial = 0;
         for (int i = 1; i <= n_filas*n_columnas ; i++) {
             //Valor inicial
             if(i == 1){
-                matrizCaracol[x_inicial][y_inicial] = i;
+                matrizCaracol[xInicial][yInicial] = i;
                 continue;
             }
             //Derecha
-            if ((y_inicial+1) < matrizCaracol[0].length) {
-                //Es posible que la derecha vaya hacia arriba
-                
-                
-                
-                else if(matrizCaracol[x_inicial][y_inicial+1] == 0 ){
-                    y_inicial++;
-                    matrizCaracol[x_inicial][y_inicial] = i;
+            if ((yInicial+1) < matrizCaracol[0].length) {
+                if(matrizCaracol[xInicial][yInicial+1] == 0 ){
+                    //if adicional en caso de que tengamos valores arriba
+                    if((xInicial-1) < matrizCaracol.length && (xInicial-1) >= 0){
+                        if(matrizCaracol[xInicial-1][yInicial] == 0){
+                            xInicial--;
+                            matrizCaracol[xInicial][yInicial] = i;
+                            continue;
+                        }
+                        //Es posible que no se cumpla la de arriba pero tengamos movimiento a la derecha
+                        else{
+                            yInicial++;
+                            matrizCaracol[xInicial][yInicial] = i;
+                            continue;
+                        }
+                    }
+                    //movimiento en fila inicial
+                    else{
+                        yInicial++;
+                    matrizCaracol[xInicial][yInicial] = i;
                     continue;
+                    }
+                    
                 }
             }
             //Abajo
-            if((x_inicial+1) < matrizCaracol.length){
-                if (matrizCaracol[x_inicial+1][y_inicial] == 0) {
-                    x_inicial++;
-                    matrizCaracol[x_inicial][y_inicial] = i;
+            if((xInicial+1) < matrizCaracol.length){
+                if (matrizCaracol[xInicial+1][yInicial] == 0) {
+                    xInicial++;
+                    matrizCaracol[xInicial][yInicial] = i;
                     continue;
                 }
             }
             //izquierda
-            if ((y_inicial-1) < matrizCaracol[0].length && (y_inicial-1) >= 0){
-                //Izquierda
-                if(matrizCaracol[x_inicial][y_inicial-1] == 0 ){
-                    y_inicial--;
-                    matrizCaracol[x_inicial][y_inicial] = i;
+            if ((yInicial-1) < matrizCaracol[0].length && (yInicial-1) >= 0){
+                if(matrizCaracol[xInicial][yInicial-1] == 0 ){
+                    yInicial--;
+                    matrizCaracol[xInicial][yInicial] = i;
                     continue;
                 }
             }
             //arriba
-            if((x_inicial-1) < matrizCaracol.length && x_inicial >= 0){
-                if (matrizCaracol[x_inicial-1][y_inicial] == 0) {
-                    x_inicial--;
-                    matrizCaracol[x_inicial][y_inicial] = i;
+            if((xInicial-1) < matrizCaracol.length && xInicial >= 0){
+                if (matrizCaracol[xInicial-1][yInicial] == 0) {
+                    xInicial--;
+                    matrizCaracol[xInicial][yInicial] = i;
                     continue;
                 }
                 
@@ -68,54 +73,6 @@ public class MatrizCaracol {
             
         }
         System.out.println(bonitas.verMatriz(matrizCaracol));
-        /*
-        while (seguir) {
-            //Derecha
-            if ((y_inicial+1) < matrizCaracol[0].length) {
-                if(matrizCaracol[x_inicial][y_inicial+1] == 0 ){
-                    y_inicial++;
-                    matrizCaracol[x_inicial][y_inicial] = numero_maximo_caracol;
-                    numero_maximo_caracol--;
-                    
-                }
-                
-            }
-            //Abajo
-            else if((x_inicial+1) < matrizCaracol.length){
-                if (matrizCaracol[x_inicial+1][y_inicial] == 0) {
-                    x_inicial++;
-                    matrizCaracol[x_inicial][y_inicial] = numero_maximo_caracol;
-                    numero_maximo_caracol--;
-                    
-                }
-                
-            }
-            //Izquierda
-            else if ((y_inicial-1) < matrizCaracol[0].length && y_inicial >=0){
-                if(matrizCaracol[x_inicial][y_inicial-1] == 0 ){
-                    y_inicial--;
-                    matrizCaracol[x_inicial][y_inicial] = numero_maximo_caracol;
-                    numero_maximo_caracol--;
-                }
-            }
-            //Arriba
-            else if((x_inicial-1) < matrizCaracol.length && x_inicial >= 0){
-                if (matrizCaracol[x_inicial-1][y_inicial] == 0) {
-                    x_inicial--;
-                    matrizCaracol[x_inicial][y_inicial] = numero_maximo_caracol;
-                    numero_maximo_caracol--;
-                }
-                
-            }
-            else{
-                break;
-            }
-            if (numero_maximo_caracol == 0) {
-                seguir = false;
-                break;
-            }
-        }
-        */
     }
 }
 
