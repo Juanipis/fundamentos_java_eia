@@ -83,11 +83,15 @@ class Matrices2D{
 	}
 	
 	public String busquedaNumeros(int[][] matriz,int objetivo){
+		//String repeditos builde = ""
+		//int objetivo = 120
 		StringBuilder repetidosBuilder = new StringBuilder();
 		int repetidosContador = 0;
 		for(int f = 0;f < matriz.length; f++){
 			for(int c = 0; c < matriz[f].length; c++){
 				if(objetivo == matriz[f][c]){
+					//repetidos += "["+f+"]"+"["+c+"],  "
+					
 					repetidosBuilder.append("["+f+"]"+"["+c+"],  ") ;
 					repetidosContador++;
 					

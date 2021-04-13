@@ -28,7 +28,7 @@ public class ejercicioRecuperacionParcial1 {
         double sumaVirusPrimo = 0;
         for (int i = 0; i < covidSemanas.length; i++) {
             //Comprobar numero primo
-            if(((i == 2 || i == 3 || i == 5 || i == 7) || (i%2 !=0 && i%3 !=0 && i%5!=0 && i%7!=0)) && i!=1){
+            if(( (i == 2 || i == 3 || i == 5 || i == 7) || (i%2 !=0 && i%3 !=0 && i%5!=0 && i%7!=0)) && i!=1){
                 sumaVirusPrimo += covidSemanas[i];
                 contadorVirusPrimo++;
             }
