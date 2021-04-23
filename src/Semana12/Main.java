@@ -7,9 +7,20 @@ public class Main {
     public static void main(String[] args) {
         Scanner eScanner = new Scanner(System.in);
         
+        //Clase AhorroVoluntario
+        AhorroVoluntario persona = new AhorroVoluntario("Juan Pablo Díaz Correa", 0);
+        persona.ingresarDinero(100000);
+        persona.retirarDinero(25000);
+        System.out.println(persona.informacionActual());
+
+
+        //Clase fruta
+        /* 
         Producto fruta = new Producto(eScanner);
         fruta.imprimirTotal();
+        */
 
+        //Clase persona
         /*
         Persona persona1 = new Persona("Juan","1000871858",17,65.7,1.78);
         Persona persona2 = new Persona();
