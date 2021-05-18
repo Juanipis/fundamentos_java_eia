@@ -25,9 +25,9 @@ public class Lavadero {
     double total = 0;
     for (int i = 0; i < vehiculos.length; i++) {
       if(vehiculos[i] == null){
-        break;
+        continue;
       }
-      else if(vehiculos[i].getClass() == Moto.class){
+      else if(vehiculos[i].getClass() == Moto.class){ // vehiculos[i] instanceof Moto
         
         if(vehiculos[i].getPropietario().getEdad() >= 60 ){
           total += 7000-(7000*0.2);
@@ -53,7 +53,7 @@ public class Lavadero {
     String listaVehiculos = "";
     for (int i = 0; i < vehiculos.length; i++) {
       if(vehiculos[i] == null ){
-        break;
+        continue;
       }
       listaVehiculos += vehiculos[i].toString() + "\n";
     }
